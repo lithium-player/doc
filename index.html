@@ -1,0 +1,33 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  <h1 class="page-heading">Crates Documentation</h1>
+
+  <ul class="posts" id="pub-repos">
+  </ul>
+
+  <script type="application/javascript">
+    var blacklist = [ "doc" ]
+    window.onload = function () {
+      $.ajax({
+        type: "GET",
+        url: "https://api.github.com/users/{{ site.name }}/repos",
+        dataType: "json",
+        success: function(result) {
+          for(var i in result) {
+            if (result[i].fork || blacklist.indexOf(result[i].name) >= 0) {
+              continue;
+            }
+            $("#pub-repos").append(
+                "<li><a href='{{ site.baseurl }}/" + result[i].name + "' target='_blank'>" +
+                  result[i].name + "</a></li>"
+            );
+          }
+        }
+      });
+    };
+  </script>
+</div>

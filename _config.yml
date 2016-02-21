@@ -1,0 +1,19 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: Lithium Player Documentation
+name: lithium-player
+email: 
+github_username: lithium-player
+description: # this means to ignore newlines until "baseurl:"
+baseurl: "/doc" # the subpath of your site, e.g. /blog
+url: "http://lithium-player.github.io" # the base hostname & protocol for your site
+
+keep_files: [ "query" ]
+# Build settings
+markdown: kramdown
