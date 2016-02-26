@@ -303,6 +303,24 @@
 <span id="260">260</span>
 <span id="261">261</span>
 <span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>Query</span>;
 <span class='kw'>use</span> <span class='ident'>Token</span>;
@@ -345,35 +363,40 @@
 
 <span class='kw'>impl</span> <span class='ident'>Query</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>parse</span>(<span class='ident'>src</span>: <span class='ident'>String</span>) <span class='op'>-&gt;</span> <span class='ident'>ParseResult</span><span class='op'>&lt;</span><span class='ident'>Query</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>tokens</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='ident'>src</span>.<span class='ident'>chars</span>();
-        <span class='kw'>loop</span> {
-            <span class='kw'>let</span> <span class='ident'>token</span> <span class='op'>=</span> <span class='ident'>parse_expr</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>iter</span>);
-            <span class='ident'>tokens</span>.<span class='ident'>push</span>(<span class='kw'>match</span> <span class='ident'>token</span> { 
-                <span class='prelude-val'>Ok</span>(<span class='ident'>t</span>) <span class='op'>=&gt;</span> <span class='ident'>t</span>,
-                <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
-                    <span class='kw'>match</span> <span class='ident'>e</span> {
-                        <span class='ident'>ParseError</span>::<span class='ident'>EndOfQuery</span> <span class='op'>=&gt;</span> <span class='kw'>break</span>,
-                        _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>),
-                    }
-                }
-            });
+        <span class='kw'>match</span> <span class='ident'>parse_scope</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>iter</span>) {
+            <span class='prelude-val'>Ok</span>(<span class='ident'>t</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Query</span> { <span class='ident'>tokens</span>: <span class='ident'>t</span> }),
+            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>),
         }
-        <span class='prelude-val'>Ok</span>(<span class='ident'>Query</span> { <span class='ident'>tokens</span>: <span class='ident'>tokens</span> })
     }
 }
 
-<span class='kw'>fn</span> <span class='ident'>parse_expr</span>(<span class='ident'>iter</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Chars</span>) <span class='op'>-&gt;</span> <span class='ident'>ParseResult</span><span class='op'>&lt;</span><span class='ident'>Token</span><span class='op'>&gt;</span> {
-    <span class='kw'>match</span> <span class='ident'>iter</span>.<span class='ident'>clone</span>().<span class='ident'>peekable</span>().<span class='ident'>peek</span>() {
-        <span class='prelude-val'>Some</span>(<span class='ident'>c</span>) <span class='op'>=&gt;</span> {
-            <span class='kw'>return</span> <span class='kw'>match</span> <span class='op'>*</span><span class='ident'>c</span> {
-                <span class='ident'>TOKEN_VAR_START</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='ident'>parse_variable</span>(<span class='ident'>iter</span>),
-                <span class='ident'>TOKEN_FUNC_NAME_START</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='ident'>parse_function</span>(<span class='ident'>iter</span>),
-                _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='ident'>parse_text</span>(<span class='ident'>iter</span>),
+<span class='kw'>fn</span> <span class='ident'>parse_scope</span>(<span class='ident'>iter</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Chars</span>) <span class='op'>-&gt;</span> <span class='ident'>ParseResult</span><span class='op'>&lt;</span><span class='ident'>Token</span><span class='op'>&gt;</span> {
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>tokens</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
+    <span class='kw'>loop</span> {
+        <span class='kw'>let</span> <span class='ident'>token</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>iter</span>.<span class='ident'>clone</span>().<span class='ident'>peekable</span>().<span class='ident'>peek</span>() {
+            <span class='prelude-val'>Some</span>(<span class='ident'>c</span>) <span class='op'>=&gt;</span> {
+                <span class='kw'>match</span> <span class='op'>*</span><span class='ident'>c</span> {
+                    <span class='ident'>TOKEN_VAR_START</span> <span class='op'>=&gt;</span> <span class='ident'>parse_variable</span>(<span class='ident'>iter</span>),
+                    <span class='ident'>TOKEN_FUNC_NAME_START</span> <span class='op'>=&gt;</span> <span class='ident'>parse_function</span>(<span class='ident'>iter</span>),
+                    <span class='ident'>TOKEN_FUNC_PARAM_END</span> <span class='op'>|</span> <span class='ident'>TOKEN_FUNC_PARAM_SEP</span> <span class='op'>=&gt;</span> <span class='kw'>break</span>,
+                    _ <span class='op'>=&gt;</span> <span class='ident'>parse_text</span>(<span class='ident'>iter</span>),
+                }
             }
-        }
-        <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>EndOfQuery</span>),
+            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>ParseError</span>::<span class='ident'>EndOfQuery</span>),
+        };
+
+        <span class='ident'>tokens</span>.<span class='ident'>push</span>(<span class='kw'>match</span> <span class='ident'>token</span> { 
+            <span class='prelude-val'>Ok</span>(<span class='ident'>t</span>) <span class='op'>=&gt;</span> <span class='ident'>t</span>,
+            <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> {
+                <span class='kw'>match</span> <span class='ident'>e</span> {
+                    <span class='ident'>ParseError</span>::<span class='ident'>EndOfQuery</span> <span class='op'>=&gt;</span> <span class='kw'>break</span>,
+                    _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>),
+                }
+            }
+        });
     }
+    <span class='prelude-val'>Ok</span>(<span class='ident'>Token</span>::<span class='ident'>Scope</span>(<span class='ident'>tokens</span>))
 }
 
 <span class='kw'>fn</span> <span class='ident'>parse_text</span>(<span class='ident'>iter</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Chars</span>) <span class='op'>-&gt;</span> <span class='ident'>ParseResult</span><span class='op'>&lt;</span><span class='ident'>Token</span><span class='op'>&gt;</span> {
@@ -468,7 +491,7 @@
                 <span class='kw'>continue</span>;
             }
             _ <span class='op'>=&gt;</span> {
-                <span class='ident'>args</span>.<span class='ident'>push</span>(<span class='kw'>match</span> <span class='ident'>parse_expr</span>(<span class='ident'>iter</span>) {
+                <span class='ident'>args</span>.<span class='ident'>push</span>(<span class='kw'>match</span> <span class='ident'>parse_scope</span>(<span class='ident'>iter</span>) {
                     <span class='prelude-val'>Ok</span>(<span class='ident'>t</span>) <span class='op'>=&gt;</span> <span class='ident'>t</span>,
                     <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>),
                 })
@@ -490,14 +513,15 @@
             <span class='attribute'>#[<span class='ident'>test</span>]</span>
             <span class='kw'>fn</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>() {
                 <span class='kw'>let</span> <span class='ident'>out</span> <span class='op'>=</span> <span class='ident'>Query</span>::<span class='ident'>parse</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>input</span>.<span class='ident'>to_owned</span>()).<span class='ident'>unwrap</span>();
-                <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>out</span>.<span class='ident'>tokens</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>out</span>]);
+                <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>out</span>.<span class='ident'>tokens</span>, <span class='ident'>Scope</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>out</span>]));
             }
         };
+
         (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>: <span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>input</span>: <span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>out</span>: <span class='ident'>expr</span>, $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>more</span>: <span class='ident'>expr</span>),<span class='op'>*</span>) <span class='op'>=&gt;</span> {
             <span class='attribute'>#[<span class='ident'>test</span>]</span>
             <span class='kw'>fn</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>() {
                 <span class='kw'>let</span> <span class='ident'>out</span> <span class='op'>=</span> <span class='ident'>Query</span>::<span class='ident'>parse</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>input</span>.<span class='ident'>to_owned</span>()).<span class='ident'>unwrap</span>();
-                <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>out</span>.<span class='ident'>tokens</span>, <span class='macro'>vec</span><span class='macro'>!</span>[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>out</span> $(, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>more</span>)<span class='op'>*</span>]);
+                <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>out</span>.<span class='ident'>tokens</span>, <span class='ident'>Scope</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>out</span> $(, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>more</span>)<span class='op'>*</span>]));
             }
         };
     }
@@ -519,10 +543,11 @@
         };
     }
 
+
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>parse_empty</span>() {
         <span class='kw'>let</span> <span class='ident'>out</span> <span class='op'>=</span> <span class='ident'>Query</span>::<span class='ident'>parse</span>(<span class='string'>&quot;&quot;</span>.<span class='ident'>to_owned</span>()).<span class='ident'>unwrap</span>();
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>out</span>.<span class='ident'>tokens</span>, <span class='macro'>vec</span><span class='macro'>!</span>[]);
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>out</span>.<span class='ident'>tokens</span>, <span class='ident'>Scope</span>(<span class='macro'>vec</span><span class='macro'>!</span>[]));
     }
 
     <span class='comment'>// Single tokens tests</span>
@@ -533,17 +558,27 @@
     <span class='macro'>parse_test</span><span class='macro'>!</span>(<span class='ident'>parse_func_param</span>,
                 <span class='string'>&quot;$func(expr, expr)&quot;</span>,
                 <span class='ident'>Function</span>(<span class='string'>&quot;func&quot;</span>.<span class='ident'>to_owned</span>(),
-                         <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Text</span>(<span class='string'>&quot;expr&quot;</span>.<span class='ident'>to_owned</span>()), <span class='ident'>Text</span>(<span class='string'>&quot; expr&quot;</span>.<span class='ident'>to_owned</span>())]));
+                         <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Scope</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Text</span>(<span class='string'>&quot;expr&quot;</span>.<span class='ident'>to_owned</span>())]),
+                              <span class='ident'>Scope</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Text</span>(<span class='string'>&quot; expr&quot;</span>.<span class='ident'>to_owned</span>())])]));
+
+    <span class='macro'>parse_test</span><span class='macro'>!</span>(<span class='ident'>parse_func_param_var</span>,
+                <span class='string'>&quot;$func(expr, expr, %name%)&quot;</span>,
+                <span class='ident'>Function</span>(<span class='string'>&quot;func&quot;</span>.<span class='ident'>to_owned</span>(),
+                         <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Scope</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Text</span>(<span class='string'>&quot;expr&quot;</span>.<span class='ident'>to_owned</span>())]),
+                              <span class='ident'>Scope</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Text</span>(<span class='string'>&quot; expr&quot;</span>.<span class='ident'>to_owned</span>())]),
+                              <span class='ident'>Scope</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Text</span>(<span class='string'>&quot; &quot;</span>.<span class='ident'>to_owned</span>()), <span class='ident'>Variable</span>(<span class='string'>&quot;name&quot;</span>.<span class='ident'>to_owned</span>())])]));
 
     <span class='macro'>parse_test</span><span class='macro'>!</span>(<span class='ident'>parse_func_rec_params</span>,
                 <span class='string'>&quot;$i($f())&quot;</span>,
-                <span class='ident'>Function</span>(<span class='string'>&quot;i&quot;</span>.<span class='ident'>to_owned</span>(), <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Function</span>(<span class='string'>&quot;f&quot;</span>.<span class='ident'>to_owned</span>(), <span class='macro'>vec</span><span class='macro'>!</span>[])]));
+                <span class='ident'>Function</span>(<span class='string'>&quot;i&quot;</span>.<span class='ident'>to_owned</span>(),
+                         <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Scope</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Function</span>(<span class='string'>&quot;f&quot;</span>.<span class='ident'>to_owned</span>(), <span class='macro'>vec</span><span class='macro'>!</span>[])])]));
 
     <span class='comment'>// Multi token tests</span>
     <span class='macro'>parse_test</span><span class='macro'>!</span>(<span class='ident'>parse_text_and_variable</span>,
                 <span class='string'>&quot;Hello %name%&quot;</span>,
                 <span class='ident'>Text</span>(<span class='string'>&quot;Hello &quot;</span>.<span class='ident'>to_owned</span>()),
                 <span class='ident'>Variable</span>(<span class='string'>&quot;name&quot;</span>.<span class='ident'>to_owned</span>()));
+
     <span class='macro'>parse_test</span><span class='macro'>!</span>(<span class='ident'>parse_text_var_func</span>,
                 <span class='string'>&quot;Hello %name% $f()&quot;</span>,
                 <span class='ident'>Text</span>(<span class='string'>&quot;Hello &quot;</span>.<span class='ident'>to_owned</span>()),
@@ -555,6 +590,7 @@
                      <span class='string'>&quot;%hello&quot;</span>,
                      <span class='ident'>ParseError</span>::<span class='ident'>VariableMissingClosing</span>);
     <span class='macro'>parse_fail_test</span><span class='macro'>!</span>(<span class='ident'>parse_fail_unknown_escape</span>, <span class='string'>&quot;\\?&quot;</span>, <span class='ident'>ParseError</span>::<span class='ident'>UnknownEscape</span>(_));
+
     <span class='macro'>parse_fail_test</span><span class='macro'>!</span>(<span class='ident'>parse_fail_end_with_escape</span>,
                      <span class='string'>&quot;\\&quot;</span>,
                      <span class='ident'>ParseError</span>::<span class='ident'>EscapeAtEndOfQuery</span>);
