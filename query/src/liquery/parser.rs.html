@@ -321,6 +321,19 @@
 <span id="278">278</span>
 <span id="279">279</span>
 <span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>Query</span>;
 <span class='kw'>use</span> <span class='ident'>Token</span>;
@@ -555,6 +568,8 @@
     <span class='macro'>parse_test</span><span class='macro'>!</span>(<span class='ident'>parse_text</span>, <span class='string'>&quot;hello&quot;</span>, <span class='ident'>Text</span>(<span class='string'>&quot;hello&quot;</span>.<span class='ident'>to_owned</span>()));
     <span class='macro'>parse_test</span><span class='macro'>!</span>(<span class='ident'>parse_escape</span>, <span class='string'>&quot;\\t&quot;</span>, <span class='ident'>Text</span>(<span class='string'>&quot;\t&quot;</span>.<span class='ident'>to_owned</span>()));
     <span class='macro'>parse_test</span><span class='macro'>!</span>(<span class='ident'>parse_func</span>, <span class='string'>&quot;$func()&quot;</span>, <span class='ident'>Function</span>(<span class='string'>&quot;func&quot;</span>.<span class='ident'>to_owned</span>(), <span class='macro'>vec</span><span class='macro'>!</span>[]));
+
+    <span class='comment'>// function tests</span>
     <span class='macro'>parse_test</span><span class='macro'>!</span>(<span class='ident'>parse_func_param</span>,
                 <span class='string'>&quot;$func(expr, expr)&quot;</span>,
                 <span class='ident'>Function</span>(<span class='string'>&quot;func&quot;</span>.<span class='ident'>to_owned</span>(),
@@ -586,6 +601,7 @@
                 <span class='ident'>Text</span>(<span class='string'>&quot; &quot;</span>.<span class='ident'>to_owned</span>()),
                 <span class='ident'>Function</span>(<span class='string'>&quot;f&quot;</span>.<span class='ident'>to_owned</span>(), <span class='macro'>vec</span><span class='macro'>!</span>[]));
 
+    <span class='comment'>// parse failures</span>
     <span class='macro'>parse_fail_test</span><span class='macro'>!</span>(<span class='ident'>parse_fail_miss_matched_variable</span>,
                      <span class='string'>&quot;%hello&quot;</span>,
                      <span class='ident'>ParseError</span>::<span class='ident'>VariableMissingClosing</span>);
@@ -601,6 +617,16 @@
                      <span class='string'>&quot;$func(&quot;</span>,
                      <span class='ident'>ParseError</span>::<span class='ident'>FuncParameterNotClosed</span>);
 
+    <span class='comment'>// errors in scope of functions</span>
+    <span class='macro'>parse_fail_test</span><span class='macro'>!</span>(<span class='ident'>parse_fail_miss_matched_variable_in_func</span>,
+                     <span class='string'>&quot;$test(%hello)&quot;</span>,
+                     <span class='ident'>ParseError</span>::<span class='ident'>VariableMissingClosing</span>);
+    <span class='macro'>parse_fail_test</span><span class='macro'>!</span>(<span class='ident'>parse_fail_unknown_escape_in_func</span>,
+                     <span class='string'>&quot;$test(\\?)&quot;</span>, <span class='ident'>ParseError</span>::<span class='ident'>UnknownEscape</span>(_));
+
+    <span class='macro'>parse_fail_test</span><span class='macro'>!</span>(<span class='ident'>parse_fail_func_no_para_in_func</span>,
+                     <span class='string'>&quot;$test($func)&quot;</span>,
+                     <span class='ident'>ParseError</span>::<span class='ident'>FuncMissingParameter</span>);
 }
 </pre>
 </section>
