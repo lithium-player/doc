@@ -71,6 +71,12 @@
 <span id="28">28</span>
 <span id="29">29</span>
 <span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
 </pre><pre class='rust '>
 <span class='kw'>mod</span> <span class='ident'>parser</span>;
 <span class='kw'>mod</span> <span class='ident'>context</span>;
@@ -81,6 +87,7 @@
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>context</span>::{<span class='ident'>EvalResult</span>, <span class='ident'>EvalError</span>, <span class='ident'>EvalFunc</span>};
 
 
+<span class='doccomment'>/// A parsed query ready for use with a `Context` and `Queryable`</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Query</span> {
 
@@ -88,15 +95,20 @@
     <span class='ident'>tokens</span>: <span class='ident'>Token</span>,
 }
 
+<span class='doccomment'>/// AST tokens for the query string</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
-<span class='kw'>enum</span> <span class='ident'>Token</span> {
+<span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Token</span> {
     <span class='doccomment'>/// Plain text with resolved escapes</span>
     <span class='ident'>Text</span>(<span class='ident'>String</span>),
 
-    <span class='doccomment'>/// A named variable with: name</span>
+    <span class='doccomment'>/// A named variable</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Parameters: Name</span>
     <span class='ident'>Variable</span>(<span class='ident'>String</span>),
 
-    <span class='doccomment'>/// A named function with: Name, Expressions</span>
+    <span class='doccomment'>/// A named function that has arguments </span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Parameters: Name, Arguments</span>
     <span class='ident'>Function</span>(<span class='ident'>String</span>, <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>Token</span><span class='op'>&gt;</span>),
 
     <span class='doccomment'>/// A level of scope</span>
