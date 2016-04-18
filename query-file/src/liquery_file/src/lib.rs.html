@@ -152,6 +152,9 @@
 <span id="109">109</span>
 <span id="110">110</span>
 <span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # liquery-file</span>
 <span class='doccomment'>//! A library to make queryable files for the liquery `Queryable`</span>
@@ -237,7 +240,7 @@
 
     <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>query_test_no_result</span> {
         (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>: <span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>field</span>: <span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
-            <span class='macro'>query_test</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>field</span>, <span class='string'>&quot;tests/file_1b.txt&quot;</span>);
+            <span class='macro'>query_test_no_result</span><span class='macro'>!</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>field</span>, <span class='string'>&quot;tests/file_1b.txt&quot;</span>);
         };
         (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>name</span>: <span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>field</span>: <span class='ident'>expr</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>path</span>: <span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
             <span class='attribute'>#[<span class='ident'>test</span>]</span>
@@ -263,6 +266,9 @@
 
     <span class='macro'>query_test</span><span class='macro'>!</span>(<span class='ident'>file_mime</span>, <span class='string'>&quot;mimetype&quot;</span>, <span class='string'>&quot;text/plain&quot;</span>);
     <span class='macro'>query_test</span><span class='macro'>!</span>(<span class='ident'>file_mime_rust</span>, <span class='string'>&quot;mimetype&quot;</span>, <span class='string'>&quot;text/x-rust&quot;</span>, <span class='string'>&quot;src/lib.rs&quot;</span>);
+
+    <span class='macro'>query_test_no_result</span><span class='macro'>!</span>(<span class='ident'>unkown_feild</span>, <span class='string'>&quot;unkown&quot;</span>);
+    <span class='macro'>query_test_no_result</span><span class='macro'>!</span>(<span class='ident'>empty_feild</span>, <span class='string'>&quot;&quot;</span>);
 }
 </pre>
 </section>
