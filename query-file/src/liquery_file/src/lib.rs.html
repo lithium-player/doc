@@ -197,15 +197,15 @@
                 }
             },
             <span class='string'>&quot;extension&quot;</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>path</span>.<span class='ident'>extension</span>() {
-                <span class='prelude-val'>Some</span>(<span class='ident'>ostr</span>) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>ostr</span>.<span class='ident'>to_str</span>() {
-                    <span class='prelude-val'>Some</span>(<span class='ident'>pstr</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>pstr</span>.<span class='ident'>to_owned</span>()),
+                <span class='prelude-val'>Some</span>(<span class='ident'>os_str</span>) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>os_str</span>.<span class='ident'>to_str</span>() {
+                    <span class='prelude-val'>Some</span>(<span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>s</span>.<span class='ident'>to_owned</span>()),
                     <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
                 },
                 <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
             },
             <span class='string'>&quot;filename&quot;</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>path</span>.<span class='ident'>file_name</span>() {
-                <span class='prelude-val'>Some</span>(<span class='ident'>ostr</span>) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>ostr</span>.<span class='ident'>to_str</span>() {
-                    <span class='prelude-val'>Some</span>(<span class='ident'>pstr</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>pstr</span>.<span class='ident'>to_owned</span>()),
+                <span class='prelude-val'>Some</span>(<span class='ident'>os_str</span>) <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>os_str</span>.<span class='ident'>to_str</span>() {
+                    <span class='prelude-val'>Some</span>(<span class='ident'>s</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Some</span>(<span class='ident'>s</span>.<span class='ident'>to_owned</span>()),
                     <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
                 },
                 <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='prelude-val'>None</span>,
