@@ -56,14 +56,14 @@
     EndOfQuery,
 }</pre><div class='docblock'><p>Errors found in parsing query</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.UnknownEscape'><code>UnknownEscape</code></td><td><div class='docblock'><p>Unknown escape sequence.
+<table class='variants_table'><tr><td id='variant.UnknownEscape'><code>UnknownEscape</code></td><td><div class='docblock'><p>Unknown escape sequence.
 String contains the sequece</p>
-</div></td></tr><tr><td id='variant.EscapeAtEndOfQuery'><code>EscapeAtEndOfQuery</code></td><td><div class='docblock'><p>Escape squence at end of query</p>
-</div></td></tr><tr><td id='variant.VariableMissingClosing'><code>VariableMissingClosing</code></td><td><div class='docblock'><p>Variable is missing closing character</p>
-</div></td></tr><tr><td id='variant.FuncMissingParameter'><code>FuncMissingParameter</code></td><td><div class='docblock'><p>Function is missing start of parameters</p>
-</div></td></tr><tr><td id='variant.FuncParameterNotClosed'><code>FuncParameterNotClosed</code></td><td><div class='docblock'><p>Function parameters is missing closing character</p>
-</div></td></tr><tr><td id='variant.EndOfQuery'><code>EndOfQuery</code></td><td><div class='docblock'><p>End of Query</p>
-</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../liquery/enum.ParseError.html' title='liquery::ParseError'>ParseError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></td><td></td></tr><tr><td id='variant.EscapeAtEndOfQuery'><code>EscapeAtEndOfQuery</code></td><td><div class='docblock'><p>Escape squence at end of query</p>
+</div></td><td></td></tr><tr><td id='variant.VariableMissingClosing'><code>VariableMissingClosing</code></td><td><div class='docblock'><p>Variable is missing closing character</p>
+</div></td><td></td></tr><tr><td id='variant.FuncMissingParameter'><code>FuncMissingParameter</code></td><td><div class='docblock'><p>Function is missing start of parameters</p>
+</div></td><td></td></tr><tr><td id='variant.FuncParameterNotClosed'><code>FuncParameterNotClosed</code></td><td><div class='docblock'><p>Function parameters is missing closing character</p>
+</div></td><td></td></tr><tr><td id='variant.EndOfQuery'><code>EndOfQuery</code></td><td><div class='docblock'><p>End of Query</p>
+</div></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../liquery/enum.ParseError.html' title='liquery::ParseError'>ParseError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -107,7 +107,7 @@ String contains the sequece</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
