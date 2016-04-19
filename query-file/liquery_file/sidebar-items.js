@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["QueryFile",""]]});
+initSidebarItems({"struct":[["QueryFile","A Queryable instance of a file"]]});
