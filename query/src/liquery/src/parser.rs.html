@@ -350,10 +350,20 @@
 <span id="306">306</span>
 <span id="307">307</span>
 <span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>Query</span>;
 <span class='kw'>use</span> <span class='ident'>Token</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>Chars</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>FromStr</span>;
 
 <span class='comment'>// consts for character representing tokens</span>
 <span class='kw'>const</span> <span class='ident'>TOKEN_VAR_START</span>: <span class='ident'>char</span> <span class='op'>=</span> <span class='string'>&#39;%&#39;</span>;
@@ -393,10 +403,18 @@
 <span class='kw'>impl</span> <span class='ident'>Query</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>parse</span>(<span class='ident'>src</span>: <span class='ident'>String</span>) <span class='op'>-&gt;</span> <span class='ident'>ParseResult</span><span class='op'>&lt;</span><span class='ident'>Query</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='ident'>src</span>.<span class='ident'>chars</span>();
-        <span class='kw'>match</span> <span class='ident'>parse_scope</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>iter</span>, <span class='boolval'>true</span>) {
+        <span class='kw'>match</span> <span class='ident'>parse_scope</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>iter</span>, <span class='boolvalue'>true</span>) {
             <span class='prelude-val'>Ok</span>(<span class='ident'>t</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>Query</span> { <span class='ident'>tokens</span>: <span class='ident'>t</span> }),
             <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>),
         }
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>FromStr</span> <span class='kw'>for</span> <span class='ident'>Query</span> {
+    <span class='kw'>type</span> <span class='prelude-val'>Err</span> <span class='op'>=</span> <span class='ident'>ParseError</span>;
+
+    <span class='kw'>fn</span> <span class='ident'>from_str</span>(<span class='ident'>s</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='self'>Self</span>, <span class='self'>Self</span>::<span class='prelude-val'>Err</span><span class='op'>&gt;</span> {
+        <span class='ident'>Query</span>::<span class='ident'>parse</span>(<span class='ident'>s</span>.<span class='ident'>to_owned</span>())
     }
 }
 
@@ -524,7 +542,7 @@
                 <span class='kw'>continue</span>;
             }
             _ <span class='op'>=&gt;</span> {
-                <span class='ident'>args</span>.<span class='ident'>push</span>(<span class='kw'>match</span> <span class='ident'>parse_scope</span>(<span class='ident'>iter</span>, <span class='boolval'>false</span>) {
+                <span class='ident'>args</span>.<span class='ident'>push</span>(<span class='kw'>match</span> <span class='ident'>parse_scope</span>(<span class='ident'>iter</span>, <span class='boolvalue'>false</span>) {
                     <span class='prelude-val'>Ok</span>(<span class='ident'>t</span>) <span class='op'>=&gt;</span> <span class='ident'>t</span>,
                     <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>),
                 })
@@ -683,6 +701,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
