@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,31 +44,38 @@
 
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>liquery</a>::<wbr><a class='enum' href=''>Token</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-183' class='srclink' href='../src/liquery/lib.rs.html#20-36' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-235' class='srclink' href='../src/liquery/lib.rs.html#20-36' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Token {
     Text(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>),
     Variable(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>),
-    Function(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>, <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a>&gt;),
+    Function(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a>&gt;),
     Scope(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a>&gt;),
 }</pre><div class='docblock'><p>AST tokens for the query string</p>
 </div><h2 class='variants'>Variants</h2>
-<table class='variants_table'><tr><td id='variant.Text'><code>Text</code></td><td><div class='docblock'><p>Plain text with resolved escapes</p>
-</div></td><td></td></tr><tr><td id='variant.Variable'><code>Variable</code></td><td><div class='docblock'><p>A named variable</p>
+<span id='variant.Text' class='variant'><code>Text(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>)</code></span><div class='docblock'><p>Plain text with resolved escapes</p>
+</div><span id='variant.Variable' class='variant'><code>Variable(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>)</code></span><div class='docblock'><p>A named variable</p>
 
 <p>Parameters: Name</p>
-</div></td><td></td></tr><tr><td id='variant.Function'><code>Function</code></td><td><div class='docblock'><p>A named function that has arguments</p>
+</div><span id='variant.Function' class='variant'><code>Function(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a>&gt;)</code></span><div class='docblock'><p>A named function that has arguments</p>
 
 <p>Parameters: Name, Arguments</p>
-</div></td><td></td></tr><tr><td id='variant.Scope'><code>Scope</code></td><td><div class='docblock'><p>A level of scope</p>
-</div></td><td></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a></code></h3><div class='impl-items'><h4 id='method.eval' class='method'><code>fn <a href='#method.eval' class='fnname'>eval</a>(&amp;self, queryable: &amp;<a class='trait' href='../liquery/trait.Queryable.html' title='liquery::Queryable'>Queryable</a>, context: &amp;<a class='trait' href='../liquery/trait.Context.html' title='liquery::Context'>Context</a>) -&gt; <a class='type' href='../liquery/type.EvalResult.html' title='liquery::EvalResult'>EvalResult</a>&lt;<a class='struct' href='../liquery/struct.QueryReturn.html' title='liquery::QueryReturn'>QueryReturn</a>&gt;</code></h4>
+</div><span id='variant.Scope' class='variant'><code>Scope(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a>&gt;)</code></span><div class='docblock'><p>A level of scope</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-132' class='srclink' href='../src/liquery/context.rs.html#47-99' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eval' class='method'><code>fn <a href='#method.eval' class='fnname'>eval</a>(&amp;self, queryable: &amp;<a class='trait' href='../liquery/trait.Queryable.html' title='liquery::Queryable'>Queryable</a>, context: &amp;<a class='trait' href='../liquery/trait.Context.html' title='liquery::Context'>Context</a>) -&gt; <a class='type' href='../liquery/type.EvalResult.html' title='liquery::EvalResult'>EvalResult</a>&lt;<a class='struct' href='../liquery/struct.QueryReturn.html' title='liquery::QueryReturn'>QueryReturn</a>&gt;</code></h4>
 <div class='docblock'><p>Evaluate a token</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-183' class='srclink' href='../src/liquery/lib.rs.html#19' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-191' class='srclink' href='../src/liquery/lib.rs.html#19' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
+</div><h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>This method tests for <code>!=</code>.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../liquery/enum.Token.html' title='liquery::Token'>Token</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-222' class='srclink' href='../src/liquery/lib.rs.html#19' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -90,6 +98,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
